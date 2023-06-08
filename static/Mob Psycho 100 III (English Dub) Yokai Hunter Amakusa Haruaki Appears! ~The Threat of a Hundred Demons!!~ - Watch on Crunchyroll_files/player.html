@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://static.crunchyroll.com/vilos-v2/web/vilos/player.html -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="react-native-stylesheet"></style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vilos</title>
+    <style>
+      body, #vilos{
+        display: flex;
+        flex: 1;
+      }
+    </style>
+  <style>/* At the moment we mostly add styles inline via react
+ * In some cases, as with psuedo element and classes, inline css is unavailable
+ * and must be injected via a Link or Style tag
+ */
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(35, 37, 43, 0.6);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #59595B;
+  width: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  width: 8px;
+  border: 2px solid transparent;
+  background-color: #a0a0a0;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Prevent text selection, it just makes things awkward */
+
+#vilos {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.rotate-animation {
+  animation: rotate 0.6s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3RoZW1lcy9DcnVuY2h5cm9sbC9jc3MvQ3J1bmNoeXJvbGxNaXNjLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0VBR0U7O0FBRUY7RUFDRSxXQUFXO0FBQ2I7O0FBRUE7RUFDRSx1Q0FBdUM7QUFDekM7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsVUFBVTtFQUNWLDZCQUE2QjtFQUM3Qiw0QkFBNEI7QUFDOUI7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsNkJBQTZCO0VBQzdCLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHVCQUF1QjtBQUN6Qjs7QUFFQSx5REFBeUQ7O0FBRXpEO0VBQ0Usc0JBQXNCO0VBQ3RCLHFCQUFxQjtFQUNyQix5QkFBeUI7RUFDekIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0Usc0NBQXNDO0FBQ3hDOztBQUVBO0VBQ0U7SUFDRSx1QkFBdUI7RUFDekI7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtBQUNGIiwic291cmNlc0NvbnRlbnQiOlsiLyogQXQgdGhlIG1vbWVudCB3ZSBtb3N0bHkgYWRkIHN0eWxlcyBpbmxpbmUgdmlhIHJlYWN0XG4gKiBJbiBzb21lIGNhc2VzLCBhcyB3aXRoIHBzdWVkbyBlbGVtZW50IGFuZCBjbGFzc2VzLCBpbmxpbmUgY3NzIGlzIHVuYXZhaWxhYmxlXG4gKiBhbmQgbXVzdCBiZSBpbmplY3RlZCB2aWEgYSBMaW5rIG9yIFN0eWxlIHRhZ1xuICovXG5cbio6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcbiAgd2lkdGg6IDEycHg7XG59XG5cbio6Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNrIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzNSwgMzcsIDQzLCAwLjYpO1xufVxuXG4qOjotd2Via2l0LXNjcm9sbGJhci10aHVtYiB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM1OTU5NUI7XG4gIHdpZHRoOiA2cHg7XG4gIGJvcmRlcjogM3B4IHNvbGlkIHRyYW5zcGFyZW50O1xuICBiYWNrZ3JvdW5kLWNsaXA6IGNvbnRlbnQtYm94O1xufVxuXG4qOjotd2Via2l0LXNjcm9sbGJhci10aHVtYjpob3ZlciB7XG4gIHdpZHRoOiA4cHg7XG4gIGJvcmRlcjogMnB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjYTBhMGEwO1xufVxuXG4qOjotd2Via2l0LXNjcm9sbGJhci1jb3JuZXIge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cblxuLyogUHJldmVudCB0ZXh0IHNlbGVjdGlvbiwgaXQganVzdCBtYWtlcyB0aGluZ3MgYXdrd2FyZCAqL1xuXG4jdmlsb3Mge1xuICAtbW96LXVzZXItc2VsZWN0OiBub25lO1xuICAtbXMtdXNlci1zZWxlY3Q6IG5vbmU7XG4gIC13ZWJraXQtdXNlci1zZWxlY3Q6IG5vbmU7XG4gIHVzZXItc2VsZWN0OiBub25lO1xufVxuXG4ucm90YXRlLWFuaW1hdGlvbiB7XG4gIGFuaW1hdGlvbjogcm90YXRlIDAuNnMgbGluZWFyIGluZmluaXRlO1xufVxuXG5Aa2V5ZnJhbWVzIHJvdGF0ZSB7XG4gIDAlIHtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSgwZGVnKTtcbiAgfVxuICAxMDAlIHtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSgzNjBkZWcpO1xuICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */</style><style>/* At the moment we only use font-weight: 500
+ * Add more variants in the future if we need them
+ */
+
+/* Path for dev/staging/prod environments */
+@font-face {
+  font-family: Lato;
+  /* We're in the themes/Crunchyroll/css directory */
+  src: url(/vilos-v2/web/vilos/assets/fonts/Lato-Medium.ttf) format("truetype");
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3RoZW1lcy9DcnVuY2h5cm9sbC9jc3MvQ3J1bmNoeXJvbGxGb250cy5idWlsZC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0VBRUU7O0FBRUYsMkNBQTJDO0FBQzNDO0VBQ0UsaUJBQWlCO0VBQ2pCLGtEQUFrRDtFQUNsRCw2RUFBNkU7RUFDN0UsZ0JBQWdCO0FBQ2xCIiwic291cmNlc0NvbnRlbnQiOlsiLyogQXQgdGhlIG1vbWVudCB3ZSBvbmx5IHVzZSBmb250LXdlaWdodDogNTAwXG4gKiBBZGQgbW9yZSB2YXJpYW50cyBpbiB0aGUgZnV0dXJlIGlmIHdlIG5lZWQgdGhlbVxuICovXG5cbi8qIFBhdGggZm9yIGRldi9zdGFnaW5nL3Byb2QgZW52aXJvbm1lbnRzICovXG5AZm9udC1mYWNlIHtcbiAgZm9udC1mYW1pbHk6IExhdG87XG4gIC8qIFdlJ3JlIGluIHRoZSB0aGVtZXMvQ3J1bmNoeXJvbGwvY3NzIGRpcmVjdG9yeSAqL1xuICBzcmM6IHVybCgvdmlsb3MtdjIvd2ViL3ZpbG9zL2Fzc2V0cy9mb250cy9MYXRvLU1lZGl1bS50dGYpIGZvcm1hdChcInRydWV0eXBlXCIpO1xuICBmb250LXdlaWdodDogNTAwO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */</style><style>.container {
+  background: rgba(0, 0, 0, 0.6);
+  left: 10px;
+  min-height: 250px;
+  min-width: 400px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 5px;
+  position: absolute;
+  top: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  color: #eee;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.selectTypeContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+select {
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+}
+
+.metadataContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.metadataInput {
+  color: #eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.metadataNewContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+table {
+  width: 400px;
+}
+
+.jumpToContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.jumpToEndButton {
+  margin-left: 5px;
+}
+
+.buttonsSection {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.downloadContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9wbHVnaW5zL3VpL1NraXBFdmVudHMvU2tpcFRpbWluZ1Rvb2wvU2tpcFRpbWluZ1Rvb2wuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsOEJBQThCO0VBQzlCLFVBQVU7RUFDVixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtFQUNsQixTQUFTO0FBQ1g7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDhCQUE4QjtBQUNoQzs7QUFFQTtFQUNFLFdBQVc7RUFDWCxpQkFBaUI7RUFDakIsZUFBZTtFQUNmLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDhCQUE4QjtBQUNoQzs7QUFFQTtFQUNFLFdBQVc7RUFDWCxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLHVCQUF1QjtFQUN2QixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UsbUJBQW1CO0VBQ25CLGFBQWE7RUFDYixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQiIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNik7XG4gIGxlZnQ6IDEwcHg7XG4gIG1pbi1oZWlnaHQ6IDI1MHB4O1xuICBtaW4td2lkdGg6IDQwMHB4O1xuICBwYWRkaW5nLWxlZnQ6IDZweDtcbiAgcGFkZGluZy1yaWdodDogNnB4O1xuICBwYWRkaW5nLXRvcDogNXB4O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMTBweDtcbn1cblxuLnJvdyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2Vlbjtcbn1cblxuLnRpdGxlIHtcbiAgY29sb3I6ICNlZWU7XG4gIGZvbnQtZmFtaWx5OiBMYXRvO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG4uc2VsZWN0VHlwZUNvbnRhaW5lciB7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbnNlbGVjdCB7XG4gIGhlaWdodDogMzBweDtcbiAgbGluZS1oZWlnaHQ6IDMwcHg7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xufVxuXG4ubWV0YWRhdGFDb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG59XG5cbi5tZXRhZGF0YUlucHV0IHtcbiAgY29sb3I6ICNlZWU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBmb250LWZhbWlseTogTGF0bztcbiAgZm9udC1zaXplOiAxNHB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLm1ldGFkYXRhTmV3Q29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbn1cblxudGFibGUge1xuICB3aWR0aDogNDAwcHg7XG59XG5cbi5qdW1wVG9Db250YWluZXIge1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuXG4uanVtcFRvRW5kQnV0dG9uIHtcbiAgbWFyZ2luLWxlZnQ6IDVweDtcbn1cblxuLmJ1dHRvbnNTZWN0aW9uIHtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG59XG5cbi5kb3dubG9hZENvbnRhaW5lciB7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */</style><style type="text/css">:root zeus-ad, :root topadblock, :root span[id^="ezoic-pub-ad-placeholder-"], :root guj-ad, :root gpt-ad, :root div[id^="zergnet-widget"], :root div[id^="yandex_ad"], :root div[id^="vuukle-ad-"], :root div[id^="sticky_ad_"], :root div[id^="rc-widget-"], :root div[id^="gpt_ad_"], :root div[id^="ezoic-pub-ad-"], :root div[id^="div-gpt-"], :root div[id^="dfp-ad-"], :root div[id^="advads_ad_"], :root div[id^="adspot-"], :root div[id^="ads300_250-widget-"], :root div[id^="ads300_100-widget-"], :root div[id^="ads250_250-widget-"], :root div[id^="adrotate_widgets-"], :root div[id^="_vdo_ads_player_ai_"], :root div[id*="ScriptRoot"], :root div[id*="MarketGid"], :root div[data-native_ad], :root div[data-mini-ad-unit], :root div[data-insertion], :root div[data-id-advertdfpconf], :root div[data-google-query-id], :root hl-adsense, :root div[data-contentexchange-widget], :root div[data-content="Advertisement"], :root div[data-alias="300x250 Ad 2"], :root div[data-alias="300x250 Ad 1"], :root div[data-adzone], :root div[data-adunit-path], :root div[data-ad-wrapper], :root div[data-ad-targeting], :root div[data-ad-placeholder], :root div[class^="native-ad-"], :root div[data-dfp-id], :root div[class^="kiwi-ad-wrapper"], :root div[class^="Adstyled__AdWrapper-"], :root div[aria-label="Ads"], :root display-ads, :root display-ad-component, :root atf-ad-slot, :root aside[id^="adrotate_widgets-"], :root article.ad, :root ark-top-ad, :root app-advertisement, :root app-ad, :root amp-fx-flying-carpet, :root amp-embed[type="taboola"], :root amp-connatix-player, :root amp-ad-custom, :root ad-shield-ads, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root citrus-ad-wrapper, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[href^="https://yogacomplyfuel.com/"], :root a[href^="https://www.purevpn.com/"][href*="&utm_source=aff-"], :root a[href^="https://www.privateinternetaccess.com/"] > img, :root a[href^="https://www.onlineusershielder.com/"], :root a[href^="https://www.nutaku.net/signup/landing/"], :root a[href^="https://www.nudeidols.com/cams/"], :root a[href^="https://www.mypornstarcams.com/landing/click/"], :root a[href^="https://www.kingsoffetish.com/tour?partner_id="], :root a[href^="https://www.infowarsstore.com/"] > img, :root a[href^="https://t.grtyi.com/"], :root a[href^="https://www.highperformancecpmgate.com/"], :root a[href^="https://www.highcpmrevenuenetwork.com/"], :root a[href^="https://www.get-express-vpn.com/offer/"], :root a[href^="https://www.financeads.net/tc.php?"], :root a[href^="https://www.brazzersnetwork.com/landing/"], :root div[class^="Display_displayAd"], :root a[href^="https://www.sheetmusicplus.com/?aff_id="], :root a[href^="https://www.bang.com/?aff="], :root [data-template-type="nativead"], :root a[href^="https://www.adultempire.com/"][href*="?partner_id="], :root a[href^="https://webroutetrk.com/"], :root a[href^="https://twinrdsyn.com/"], :root a[href^="https://tsartech.g2afse.com/"], :root [href^="https://www.mypatriotsupply.com/"] > img, :root a[href^="https://trk.softonixs.xyz/"], :root a[href^="https://trk.nfl-online-streams.club/"], :root a[href^="https://tracking.avapartner.com/"], :root a[href^="https://track.wg-aff.com"], :root a[href^="https://track.afcpatrk.com/"], :root a[href^="https://torguard.net/aff.php"] > img, :root div[data-adname], :root a[href^="https://thechleads.pro/"], :root [data-role="tile-ads-module"], :root a[href^="https://adsrv4k.com/"], :root a[href^="https://go.xlviirdr.com"], :root a[href^="https://thaudray.com/"], :root a[href^="https://www.5mno3.com/"], :root a[href^="https://taghaugh.com/"], :root a[href^="https://click.candyoffers.com/"], :root [href^="https://zstacklife.com/"] img, :root a[href^="https://t.aslnk.link/"], :root a[href^="https://t.adating.link/"], :root a[href^="https://go.trackitalltheway.com/"], :root [href^="https://track.fiverr.com/visit/"] > img, :root a[href^="https://syndication.exoclick.com/"], :root a[href^="https://syndication.dynsrvtbg.com/"], :root a[href^="https://streamate.com/landing/click/"], :root a[href^="https://ad.doubleclick.net/"], :root a[href^="https://static.fleshlight.com/images/banners/"], :root a[href^="https://aweptjmp.com/"], :root a[href^="https://s.zlinkc.com/"], :root a[data-obtrack^="http://paid.outbrain.com/network/redir?"], :root a[href^="https://reinstandpointdumbest.com/"], :root a[href^="https://go.strpjmp.com/"], :root a[href^="https://refpa4903566.top/"], :root a[href^="https://prf.hn/click/"][href*="/camref:"] > img, :root a[href^="https://serve.awmdelivery.com/"], :root a[href^="https://prf.hn/click/"][href*="/adref:"] > img, :root [href^="https://r.kraken.com/"], :root a[href^="https://mmwebhandler.aff-online.com/"], :root a[href^="https://www.bet365.com/"][href*="affiliate="], :root a[href^="https://pb-track.com/"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root div[id^="ad_position_"], :root a[href^="https://ovb.im/"], :root div[id^="ad-div-"], :root a[href^="https://newbinotracs.com/"], :root a[href^="https://natour.naughtyamerica.com/track/"], :root [href^="https://stvkr.com/"], :root a[href^="https://mediaserver.entainpartners.com/renderBanner.do?"], :root [href^="https://www.herbanomic.com/"] > img, :root a[href^="https://maymooth-stopic.com/"], :root a[href^="https://loboclick.com"], :root [href^="https://routewebtk.com/"], :root a[href^="https://see.kmisln.com/"], :root .nya-slot[style], :root a[href^="https://a.bestcontentweb.top/"], :root a[href^="https://lobimax.com/"], :root a[href^="https://lead1.pl/"], :root a[href^="https://refpa.top/"], :root a[href^="https://landing.brazzersnetwork.com/"], :root a[href^="https://ads.leovegas.com/redirect.aspx?"], :root a[href^="https://land.brazzersnetwork.com/landing/"], :root a[href^="https://track.adform.net/"], :root [data-css-class="dfp-inarticle"], :root .card-captioned.crd > .crd--cnt > .s2nPlayer, :root a[href^="https://go.tmrjmp.com"], :root a[href^="https://l.hyenadata.com/"], :root a[href^="https://juicyads.in/"], :root a[href^="https://itubego.com/video-downloader/?affid="], :root a[href^="https://iqbroker.com/"][href*="?aff="], :root a[href^="https://incisivetrk.cvtr.io/click?"], :root [data-revive-zoneid], :root a[href^="https://googleads.g.doubleclick.net/pcs/click"], :root a[href^="https://clk.wrenchsound.store/"], :root a[href^="https://go.zybrdr.com"], :root [href^="http://join.michelle-austin.com/"], :root [class^="tile-picker__CitrusBannerContainer-sc-"], :root a[href^="https://go.xxxiijmp.com"], :root a[href^="https://go.xtbaffiliates.com/"], :root a[href^="https://ismlks.com/"], :root a[href^="//a.bestcontentfare.top/"], :root [href^="https://www.mypillow.com/"] > img, :root a[href^="https://azpresearch.club/"], :root a[href^="https://go.xlirdr.com"], :root a[href^="https://go.skinstrip.net"][href*="?campaignId="], :root a[href^="https://go.markets.com/visit/?bta="], :root a[href^="https://billing.purevpn.com/aff.php"] > img, :root a[href^="https://go.hpyrdr.com/"], :root a[href^="https://go.goaserv.com/"], :root a[href^="https://go.dmzjmp.com"], :root a[href^="https://twinrdsrv.com/"], :root a[href^="https://go.admjmp.com/"], :root [href^="https://kingered-banctours.com/"], :root a[href^="https://get.surfshark.net/aff_c?"][href*="&aff_id="] > img, :root a-ad, :root a[href^="https://affiliate.rusvpn.com/click.php?"], :root a[href^="https://geniusdexchange.com/"], :root a[href^="https://frameworkdeserve.com/"], :root a[href^="https://flirtandsweets.life/"], :root a[href^="https://www.mrskin.com/tour"], :root a[href^="https://financeads.net/tc.php?"], :root a[href^="https://www.mrskin.com/account/"], :root a[href^="https://s.optzsrv.com/"], :root bottomadblock, :root a[href^="https://fertilitycommand.com/"], :root [data-freestar-ad], :root a[href^="https://fc.lc/ref/"], :root div[data-native-ad], :root a[href^="https://engine.trackingdesks.com/"], :root [href^="https://totlnkcl.com/"], :root a[href^="https://www.adskeeper.com"], :root a[data-redirect^="https://paid.outbrain.com/network/redir?"], :root [href^="https://www.reimageplus.com/"], :root a[href^="https://engine.phn.doublepimp.com/"], :root a[href^="https://engine.blueistheneworanges.com/"], :root div[id^="optidigital-adslot"], :root a[href^="https://wantopticalfreelance.com/"], :root a[href^="https://dl-protect.net/"], :root a[href^="https://datingoffers30.info/"], :root a[href^="https://clixtrac.com/"], :root a[href^="https://mediaserver.gvcaffiliates.com/renderBanner.do?"], :root a[href^="https://join.dreamsexworld.com/"], :root a[href^="https://click.linksynergy.com/fs-bin/"], :root AD-TRIPLE-BOX, :root a[href^="https://click.hoolig.app/"], :root a[href^="https://track.totalav.com/"], :root img[src^="https://images.purevpnaffiliates.com"], :root a[href^="https://porntubemate.com/"], :root a[href^="http://www.gfrevenge.com/landing/"], :root a[href^="https://clickadilla.com/"], :root a[href^="https://click.dtiserv2.com/"], :root a[href^="https://go.xlvirdr.com"], :root a[href^="https://claring-loccelkin.com/"], :root [class^="s2nPlayer"], :root a[href^="https://chaturbate.jjgirls.com/?track="], :root a[href^="https://chaturbate.com/in/?track="], :root a[href^="https://chaturbate.com/in/?tour="], :root a[href^="https://cams.imagetwist.com/in/?track="], :root a[href^="https://cam4com.go2cloud.org/"], :root a[href^="https://affcpatrk.com/"], :root a[href^="https://bongacams2.com/track?"], :root a[href^="https://www.sheetmusicplus.com/"][href*="?aff_id="], :root a[href^="https://bngpt.com/"], :root a[href^="https://bluedelivery.pro/"], :root a[href^="https://black77854.com/"], :root a[href^="https://bc.game/"], :root a[href^="https://ndt5.net/"], :root a[href^="https://batheunits.com/"], :root a[target="_blank"][onmousedown="this.href^='http://paid.outbrain.com/network/redir?"], :root a[href^="https://banners.livepartners.com/"], :root a[href^="//whulsaux.com/"], :root a[href^="https://m.do.co/c/"] > img, :root [href="https://masstortfinancing.com"] img, :root a[href^="https://bongacams10.com/track?"], :root a[href^="https://albionsoftwares.com/"], :root a[href^="https://t.hrtye.com/"], :root a[href^="https://go.etoro.com/"] > img, :root a[href^="https://www.adxsrve.com/"], :root a[href^="https://convertmb.com/"], :root a[href^="https://join.sexworld3d.com/track/"], :root a[href^="https://intenseaffiliates.com/redirect/"], :root a[href^="https://ads.ad4game.com/"], :root [id^="google_ads_iframe"], :root a[href^="https://syndication.optimizesrv.com/"], :root a[href^="https://affpa.top/"], :root a[href^="https://adnetwrk.com/"], :root a[href^="https://adjoincomprise.com/"], :root [href^="http://misslinkvocation.com/"], :root a[href^="https://adclick.g.doubleclick.net/"], :root a[href^="https://adswick.com/"], :root a[href^="https://a.bestcontentoperation.top/"], :root [data-m-ad-id], :root a[href^="https://a-ads.com/"], :root [href="https://ourgoldguy.com/contact/"] img, :root a[href^="https://brightadnetwork.com/"], :root [href^="https://www.avantlink.com/click.php"] img, :root a[href^="http://www.onwebcam.com/random?t_link="], :root a[href^="https://awentw.com/"], :root a[href^="https://www.googleadservices.com/pagead/aclk?"], :root a[href^="http://www.mrskin.com/tour"], :root a[href^="https://agacelebir.com/"], :root a[href^="https://spygasm.com/track?"], :root a[href^="http://d2.zedo.com/"], :root a[href^="http://www.friendlyduck.com/AF_"], :root a[href^="https://ad.kubiccomps.icu/"], :root a[href^="http://trk.globwo.online/"], :root a[href^="https://prf.hn/click/"][href*="/creativeref:"] > img, :root a[href^="http://www.adultempire.com/unlimited/promo?"][href*="&partner_id="], :root a[href^="http://traffic.tc-clicks.com/"], :root a[href^="http://tour.mrskin.com/"], :root a[href^="https://join.virtualtaboo.com/track/"], :root a[href^="https://funkydaters.com/"], :root [id^="ad_sky"], :root a[href^="http://https://www.get-express-vpn.com/offer/"], :root div[id^="google_dfp_"], :root a[href^="http://googleads.g.doubleclick.net/pcs/click"], :root .rc-cta[data-target], :root [href^="http://go.cm-trk2.com/"], :root a[href^="http://click.payserve.com/"], :root a[href^="https://porngames.adult/?SID="], :root [href^="http://clicks.totemcash.com/"], :root a[href^="https://ad.zanox.com/ppc/"] > img, :root a[href^="https://misspkl.com/"], :root a[href^="https://landing1.brazzersnetwork.com"], :root #slashboxes > .deals-rail, :root [href^="http://globsads.com/"], :root [href^="https://www.brighteonstore.com/products/"] img, :root a[href^="http://bc.vc/?r="], :root a[href^="https://mityneedn.com/"], :root [href^="http://homemoviestube.com/"], :root a[href^="http://ad.doubleclick.net/"], :root a[href^="//zunsoach.com/"], :root a[href^="https://a2.adform.net/"], :root a[href^="http://static.fleshlight.com/images/banners/"], :root a[href^="https://a.adtng.com/"], :root a[href^="//pubads.g.doubleclick.net/"], :root a[href^="//go.eabids.com/"], :root a[href^="https://go.nordvpn.net/aff"] > img, :root [data-d-ad-id], :root a[href*=".engine.adglare.net/"], :root [data-dynamic-ads], :root a[data-widget-outbrain-redirect^="http://paid.outbrain.com/network/redir?"], :root [data-ad-width], :root [href^="https://join.playboyplus.com/track/"], :root a[data-url^="http://paid.outbrain.com/network/redir?"] + .author, :root a[href^="https://axdsz.pro/"], :root a[href^="http://bodelen.com/"], :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root [href^="https://cpa.10kfreesilver.com/"], :root a[href^="https://a.bestcontentfood.top/"], :root a[href^="http://wct.link/"], :root [href^="https://goldforyourfuture.com/clk.trk"] img, :root [href^="https://infinitytrk.com/"], :root [onclick^="location.href='http://www.reimageplus.com"], :root [id^="section-ad-banner"], :root a[href^="https://go.julrdr.com/"], :root .trc_rbox_div .syndicatedItemUB, :root [href^="https://zone.gotrackier.com/"], :root [href^="https://detachedbates.com/"], :root [href^="https://www.targetingpartner.com/"], :root a[href^="https://fourwhenstatistics.com/"], :root [href^="https://www.restoro.com/"], :root a[href^="https://join.virtuallust3d.com/"], :root .section-subheader > .section-hotel-prices-header, :root [href^="https://go.affiliatexe.com/"], :root [href^="https://www.hostg.xyz/"] > img, :root [href^="https://ilovemyfreedoms.com/landing-"], :root a[href^="https://staRTgaming.net/tienda/"], :root a[href^="https://STaRtgAmInG.net/tienda/"], :root a[href^="https://fastestvpn.com/lifetime-special-deal?a_aid="], :root a[href^="https://tour.mrskin.com/"], :root div[id^="ad-position-"], :root a[href^="http://adultfriendfinder.com/go/page/landing"], :root a[href^="http://affiliate.glbtracker.com/"], :root a[href^="https://leg.xyz/?track="], :root div[id^="crt-"][style], :root a[href^="http://adultgames.xxx/"], :root a[href^="https://traffic.bannerator.com/"], :root [href^="https://shiftnetwork.infusionsoft.com/go/"] > img, :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"], :root [href^="https://secure.bmtmicro.com/servlets/"], :root a[href^="https://losingoldfry.com/"], :root .scroll-fixable.rail-right > .deals-rail, :root a[href^="https://oackoubs.com/"], :root a[href^="https://ak.psaltauw.net/"], :root a[href^="https://awptjmp.com/"], :root a[href^="https://go.goasrv.com/"], :root [href^="http://mypillow.com/"] > img, :root a[href^="http://bongacams.com/track?"], :root a[href^="https://fleshlight.sjv.io/"], :root [data-ad-manager-id], :root a[href^="https://promo-bc.com/"], :root a[href^="https://clicks.pipaffiliates.com/"], :root [href^="https://noqreport.com/"] > img, :root [href^="https://mypatriotsupply.com/"] > img, :root [href^="https://mylead.global/stl/"] > img, :root #leader-companion > a[href], :root a[href^="https://transfer.xe.com/signup/track/redirect?"], :root .vid-present > .van_vid_carousel__padding, :root div[id^="adngin-"], :root [data-rc-widget], :root a[href^="https://go.xxxijmp.com"], :root [href^="https://istlnkcl.com/"], :root [href^="https://go.4rabettraff.com/"], :root a[href^="https://tm-offers.gamingadult.com/"], :root [href^="https://charmingdatings.life/"], :root [href^="https://glersakr.com/"], :root ins.adsbygoogle, :root a[href^="https://1startfiledownload1.com/"], :root .trc_rbox_border_elm .syndicatedItem, :root a[href^="http://www.onclickmega.com/jump/next.php?"], :root a[href^="http://adf.ly/?id="], :root a[href^="https://wittered-mainging.com/"], :root [href^="https://engine.gettopple.com/"], :root a[href^="https://go.gldrdr.com/"], :root [data-id^="div-gpt-ad"], :root a[href^="https://tracker.loropartners.com/"], :root [href^="https://awbbjmp.com/"], :root a[href^="https://k2s.cc/pr/"], :root [href^="https://affect3dnetwork.com/track/"], :root a[href^="https://camfapr.com/landing/click/"], :root [href="//sexcams.plus/"], :root a[href^="https://go.currency.com/"], :root [href^="http://www.mypillow.com/"] > img, :root div[id^="div-ads-"], :root [href^="https://rapidgator.net/article/premium/ref/"], :root a[href^="https://www.sugarinstant.com/?partner_id="], :root a[href^="https://adultfriendfinder.com/go/page/landing"], :root [href^="https://join3.bannedsextapes.com"], :root div[data-spotim-slot], :root [href^="https://antiagingbed.com/discount/"] > img, :root a[href^="https://go.247traffic.com/"], :root [href^="https://join.girlsoutwest.com/"], :root [href^="http://trafficare.net/"], :root a[href^="https://tc.tradetracker.net/"] > img, :root a[href^="https://adserver.adreactor.com/"], :root [href^="http://join.shemalesfromhell.com/"], :root [id^="ad_slider"], :root #searchResultsList > div > div[onclick$="'inline.ad'});"], :root [data-adbridg-ad-class], :root a[href^="http://www.adultdvdempire.com/?partner_id="][href*="&utm_"], :root [href^="http://join.shemale.xxx/"], :root a[href^="https://ads.betfair.com/redirect.aspx?"], :root [href^="http://www.fleshlightgirls.com/"], :root [href^="http://join.trannies-fuck.com/"], :root .trc_rbox .syndicatedItem, :root a[href^="http://cam4com.go2cloud.org/aff_c?"], :root a[href^="https://cpmspace.com/"], :root [href^="https://freecourseweb.com/"] > .sitefriend, :root a[href^="https://thefacux.com/"], :root a[href^="https://ads.planetwin365affiliate.com/redirect.aspx?"], :root [href^="http://join.rodneymoore.com/"], :root a[href*=".trust.zone"], :root [href^="https://shrugartisticelder.com"], :root [href^="https://go.xlrdr.com"], :root a[href^="https://staRTgamIng.net/tienda/"], :root div[id^="lazyad-"], :root a[href^="http://com-1.pro/"], :root [name^="google_ads_iframe"], :root a[href^="https://go.xxxjmp.com"], :root [data-desktop-ad-id], :root [href^="https://wct.link/"], :root div[recirculation-ad-container], :root [href^="https://traffserve.com/"], :root #kt_player > a[target="_blank"], :root [href="https://www.masstortfinancing.com/"] > img, :root .ob_container .item-container-obpd, :root [id^="div-gpt-ad"], :root [href^="https://mypillow.com/"] > img, :root [href^="https://ad.admitad.com/"], :root a[href^="https://u.expresstech.io/"], :root a[href^="https://www.geekbuying.com/dynamic-ads/"], :root a[href^="https://lnkxt.bannerator.com/"], :root [href="https://jdrucker.com/gold"] > img, :root [href^="https://v.investologic.co.uk/"], :root [href^="https://mystore.com/"] > img, :root ADS-RIGHT, :root [href^="https://cipledecline.buzz/"], :root a[href^="https://track.ultravpn.com/"], :root [href^="https://goldcometals.com/clk.trk"], :root a[href^="https://go.hpyjmp.com"], :root [data-mobile-ad-id], :root a[href^="http://tc.tradetracker.net/"] > img, :root a[href^="http://affiliates.thrixxx.com/"], :root [data-ez-name], :root a[href^="http://go.xtbaffiliates.com/"], :root .grid > .container > #aside-promotion, :root DFP-AD, :root [data-adblockkey], :root .trc_related_container div[data-item-syndicated="true"], :root [href^="https://click2cvs.com/"], :root a[href^="https://startgAming.net/tienda/"], :root [href^="https://safer-redirection.com"], :root [href^="https://optimizedelite.com/"] > img, :root [data-name="adaptiveConstructorAd"], :root [onclick*="content.ad/"], :root AMP-AD, :root [data-ad-cls], :root a[href^="https://www.goldenfrog.com/vyprvpn?offer_id="][href*="&aff_id="], :root [id^="ad-wrap-"], :root div[id^="taboola-stream-"], :root [href^="https://go.astutelinks.com/"], :root [class^="amp-ad-"], :root [href^="https://affiliate.fastcomet.com/"] > img, :root [class^="adDisplay-module"], :root AD-SLOT, :root a[href^="https://go.xlviiirdr.com"], :root [href^="http://join.shemalepornstar.com/"], :root a[href^="http://partners.etoro.com/"], :root [data-advadstrackid], :root [href^="https://trackfin.asia/"], :root .plistaList > .plista_widget_underArticle_item[data-type="pet"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root .trc_rbox_div .syndicatedItem, :root div[data-adunit], :root app-large-ad, :root [href^="https://turtlebids.irauctions.com/"] img, :root a[href^="https://iactrivago.ampxdirect.com/"], :root a[href^="https://a.medfoodhome.com/"], :root [data-ad-module], :root a[href^="https://go.cmtaffiliates.com/"], :root a[href^="https://bs.serving-sys.com"], :root [href^="http://residenceseeingstanding.com/"], :root a[href*="//lkstrck2.com/"], :root .plistaList > .itemLinkPET, :root a[href^="https://traffdaq.com/"], :root [class^="div-gpt-ad"], :root a[href^="https://refpazkjixes.top/"], :root #mgb-container > #mgb, :root [href^="https://www.cloudways.com/en/?id"], :root a[href^="https://trk.sportsflix4k.club/"], :root a[href^="https://go.xlivrdr.com"] { display: none !important; }</style></head>
+  <body>
+    <div id="vilos"><div class="css-1dbjc4n r-13awgt0 r-12vffkv"><div class="css-1dbjc4n r-13awgt0 r-12vffkv"><div class="css-1dbjc4n r-kemksi r-1e5vlcs r-1tsuqlv r-1udh08x r-13qz1uu" id="vilosRoot" data-testid="vilos-root_container"><div class="css-1dbjc4n r-1awozwy r-kemksi r-1p0dtai r-1777fci r-1d2f490 r-u8s1d r-zchlnj r-ipm5af" id="velocity-player-package"><video id="player0" playsinline="" style="display: flex; height: 100%; width: 100%;" src="blob:https://static.crunchyroll.com/100515d6-a060-42fe-9d7c-358895040bf2"></video><canvas id="velocity-canvas" style="pointer-events: none; position: absolute; z-index: 2;" width="924" height="520"></canvas><div id="vilosVttJs" class="textTrackLayer" style="inset: 0px; position: absolute; z-index: 2;"></div><style></style></div><div class="css-1dbjc4n r-1p0dtai r-1d2f490 r-u8s1d r-zchlnj r-ipm5af" id="velocity-controls-package"><div class="css-1dbjc4n r-1p0dtai r-1d2f490 r-12vffkv r-u8s1d r-zchlnj r-ipm5af" style="opacity: 0; background-color: rgba(0, 0, 0, 0.2);"><div class="css-1dbjc4n r-1awozwy r-1p0dtai r-1777fci r-1d2f490 r-633pao r-u8s1d r-zchlnj r-ipm5af" data-testid="vilos-loading" style="padding: 16px;"><div class="css-1dbjc4n" style="height: 64px; width: 64px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 104" width="104" height="104" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"><defs><clippath id="__lottie_element_10"><rect width="104" height="104" x="0" y="0"></rect></clippath></defs><g clip-path="url(#__lottie_element_10)"><g transform="matrix(1.174340009689331,0,0,1.174340009689331,0.32904052734375,0.32904052734375)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,44,44)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(228,106,22)" stroke-opacity="0.6" stroke-width="8" d=" M0,-38 C20.986000061035156,-38 38,-20.98699951171875 38,0 C38,20.986000061035156 20.986000061035156,38 0,38 C-20.98699951171875,38 -38,20.986000061035156 -38,0 C-38,-20.98699951171875 -20.98699951171875,-38 0,-38z"></path></g></g><g transform="matrix(1.174340009689331,0,0,1.174340009689331,0.32904052734375,0.32904052734375)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(0.692599892616272,-0.7213219404220581,0.7213219404220581,0.692599892616272,44,44)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(228,106,22)" stroke-opacity="1" stroke-width="8" d=" M-8.524999618530273,37.040000915527344 C-25.406999588012695,33.16999816894531 -38,18.05500030517578 -38,0 C-38,-20.499000549316406 -21.76799964904785,-37.207000732421875 -1.4559999704360962,-37.972999572753906"></path></g></g></g></svg></div></div></div><div class="css-1dbjc4n" id="ad-container"></div><div tabindex="0" class="css-1dbjc4n r-1loqt21 r-1pi2tsx r-10paoce r-1otgn73 r-13qz1uu" id="vilosControlsContainer" data-testid="vilos-controls"><div class="css-1dbjc4n r-rx5rfo r-13awgt0"></div></div><div class="css-1dbjc4n r-1niwhzg r-u8s1d" style="height: 48px; left: 20px; opacity: 0; top: 20px; width: 48px;"><div class="css-1dbjc4n r-1mlwlqe r-1udh08x r-417010" style="height: 48px; width: 48px;"><div class="css-1dbjc4n r-1niwhzg r-vvn4in r-u6sd8q r-ehq7j7 r-1p0dtai r-1pi2tsx r-1d2f490 r-u8s1d r-zchlnj r-ipm5af r-13qz1uu r-1wyyakw"></div></div></div></div><div class="css-1dbjc4n r-1p0dtai r-1d2f490 r-12vffkv r-u8s1d r-zchlnj r-ipm5af" id="velocity-overlay-package"><div class="css-1dbjc4n r-kemksi r-1p0dtai r-1d2f490 r-12vffkv r-u8s1d r-zchlnj r-ipm5af" style="opacity: 0;"><div class="css-1dbjc4n r-1awozwy r-1p0dtai r-1777fci r-1d2f490 r-633pao r-u8s1d r-zchlnj r-ipm5af" data-testid="vilos-loading" style="padding: 16px;"><div class="css-1dbjc4n" style="height: 64px; width: 64px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 104" width="104" height="104" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);"><defs><clippath id="__lottie_element_2"><rect width="104" height="104" x="0" y="0"></rect></clippath></defs><g clip-path="url(#__lottie_element_2)"><g transform="matrix(1.174340009689331,0,0,1.174340009689331,0.32904052734375,0.32904052734375)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,44,44)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(228,106,22)" stroke-opacity="0.6" stroke-width="8" d=" M0,-38 C20.986000061035156,-38 38,-20.98699951171875 38,0 C38,20.986000061035156 20.986000061035156,38 0,38 C-20.98699951171875,38 -38,20.986000061035156 -38,0 C-38,-20.98699951171875 -20.98699951171875,-38 0,-38z"></path></g></g><g transform="matrix(1.174340009689331,0,0,1.174340009689331,0.32904052734375,0.32904052734375)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(0.692599892616272,-0.7213219404220581,0.7213219404220581,0.692599892616272,44,44)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(228,106,22)" stroke-opacity="1" stroke-width="8" d=" M-8.524999618530273,37.040000915527344 C-25.406999588012695,33.16999816894531 -38,18.05500030517578 -38,0 C-38,-20.499000549316406 -21.76799964904785,-37.207000732421875 -1.4559999704360962,-37.972999572753906"></path></g></g></g></svg></div></div></div><div class="css-1dbjc4n r-1awozwy r-1p0dtai r-1777fci r-633pao r-u8s1d r-13qz1uu" style="display: flex; height: 30px; opacity: 0;"><div dir="auto" class="css-901oao r-jwli3a r-1bjzygm r-ubezar r-rjixqe r-q4m81j"></div></div></div></div></div></div></div>
+    <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./pal.js" charset="utf-8" style="display: none !important;"></script>
+    <script type="text/javascript" src="./ima3.js" charset="utf-8" style="display: none !important;"></script>
+  
+
+</body><div id="detach-button-host" style="--opera-video-toolbar-button-color-contrasting:hsla(0, 0%, 100%, 1); top: 0px; left: 674px;"><template shadowrootmode="open"><style type="text/css">
+        :host {
+          --opera-video-toolbar-button-color: #0199FF;
+          
+      --opera-video-toolbar-button-color: env(-opera-gx-accent-color);
+      --opera-video-toolbar-dialog-shadow-color: hsl(env(-opera-gx-accent-color-h) env(-opera-gx-accent-color-s) env(-opera-gx-accent-color-l) / 48%);
+      --opera-video-toolbar-dialog-bg-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 12%);
+      --opera-video-toolbar-dialog-bg-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 100%);
+      --opera-video-toolbar-dialog-text-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 100%);
+      --opera-video-toolbar-dialog-text-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 0%);
+      --opera-video-toolbar-dialog-icon-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 77%);
+      --opera-video-toolbar-dialog-icon-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 12%);
+      --opera-video-toolbar-dialog-cover-color': hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 4% / 60%);
+      --opera-video-toolbar-dialog-border-color: env(-opera-gx-accent-color);
+    ;
+          font-family: system-ui;
+          min-height: 44px;
+          overflow: visible;
+          pointer-events: none;
+          position: fixed;
+          top: 0;
+          width: 68px;
+          z-index: 2147483647;
+        }
+
+        .container {
+          clip: rect(0px, 10000px, 10043px, 0px);
+          position: absolute;
+          height: 44px;
+        }
+
+        .button-container {
+          box-sizing: border-box;
+          display: flex;
+          justify-content: space-around;
+          height: 32px;
+          pointer-events: none;
+          position: absolute;
+          text-align: center;
+          top: -32px;
+          transition: top .3s;
+          font-family: system-ui;
+      }
+
+      .custom-button-wrapper {
+        box-sizing: border-box;
+        overflow: visible;
+        pointer-events: none;
+        position: relative;
+      }
+
+      .custom-button {
+        background: linear-gradient(rgba(103,105,105,0.5),
+                                    rgba(68,70,71,0.5));
+        border-radius: 16px;
+        font-size: 0px;
+        line-height: 32px;
+        pointer-events: initial;
+        white-space: nowrap;
+        margin: 0 2px;
+        height: 32px;
+      }
+
+      .custom-button:hover {
+        background: linear-gradient(rgba(103,105,105,0.75),
+                                    rgba(68,70,71,0.75));
+      }
+
+      .custom-button[active] {
+        background: var(--opera-video-toolbar-button-color) !important;
+      }
+
+      .custom-button-contents {
+        align-items: center;
+        display: inline-flex;
+        height: 32px;
+        justify-content: center;
+        pointer-events: none;
+        vertical-align: middle;
+      }
+
+      .custom-button-image {
+        width: 32px;
+      }
+
+      .custom-button-image .image {
+        background-repeat: no-repeat;
+        background-position: center left;
+        height: 16px;
+        width: 20px;
+      }
+
+      .custom-button-text {
+        color: white;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 30px;
+        max-width: 0px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        text-align: start;
+        transition: all .2s;
+        user-select: none;
+      }
+
+      .custom-button-popout {
+        padding: 10px;
+        background: white;
+        height: fit-content;
+        width: fit-content;
+      }
+
+      .custom-button-text[enabled] {
+        max-width: 999px;
+        opacity: 1;
+        padding: 0 10px 0 0;
+        transition: all .2s;
+      }
+
+      .custom-button[active][hovered] .custom-button-image .image:not(.animating) {
+        background-image: -webkit-image-set(
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/icon_close_1x.png) 1x,
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/icon_close_2x.png) 2x
+        ) !important;
+      }
+
+      .custom-button[inactive] {
+        background: linear-gradient(rgba(103,105,105,0.25),
+                                    rgba(68,70,71,0.25)) !important;
+      }
+
+      .custom-button[inactive] .custom-button-contents {
+        opacity: 0.25;
+      }
+
+      .custom-button[disabled] {
+        display: none;
+      }
+
+      .button-container.visible {
+        top: 12px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .button-container.hide {
+        visibility: hidden;
+      }
+    </style><style type="text/css">
+      .hint {
+          background-color: #f7f9fa;
+          border: solid 1px #c8cbcc;
+          border-radius: 4px;
+          box-shadow: 0 2px 24px 0 rgba(0, 0, 0, .16);
+          padding: 12px 40px 12px 16px;
+          pointer-events: initial;
+          position: absolute;
+          width: 290px;
+          z-index: 2;
+        }
+
+        .hint::after {
+          border-color: #c8cbcc;
+          border-style: solid;
+          border-width: 1px 0 0 1px;;
+          background-color: #f7f9fa;
+          background-clip: content-box;
+          height: 9px;
+          content: '';
+          display: block;
+          width: 9px;
+          position: absolute;
+          transform: rotate(-45deg);
+          z-index: -1;
+        }
+
+        .hint::after {
+          left: -6px;
+          top: 14px;
+        }
+
+        .hint.to-bottom::after {
+          bottom: 14px;
+          top: auto;
+        }
+
+        .hint .hint-title {
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .hint .font-label {
+          margin-bottom: 0;
+          font-size: 13px;
+        }
+
+        .hint .font-label + .button {
+          margin-top: 13px;
+        }
+
+        .hint + .tooltip {
+          display: none;
+        }
+
+        .hint-close {
+          background: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/close.svg) no-repeat center;
+          height: 24px;
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 24px;
+        }
+
+        .hint-close:hover {
+          background-image: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/close_hover_round.svg);
+        }
+    </style><style type="text/css">
+      #video-detach-button .custom-button-image .image {
+        background-image: -webkit-image-set(
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/icon_popout_1x.png) 1x,
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/icon_popout_2x.png) 2x
+        );
+      }
+    </style><style type="text/css">
+      #send-by-qrcode-button .custom-button-image .image {
+        background-image: -webkit-image-set(
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/video_to_phone.svg) 1x,
+            url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/video_to_phone.svg) 2x
+        );
+      }
+    </style><style type="text/css">
+      .custom-button-wrapper:has(#lucid-mode-button) {
+      
+      
+        --lucid-label-min-width: 38px
+      
+      }
+
+      
+        #lucid-mode-button[active] .custom-button-text {
+          color: var(--opera-video-toolbar-button-color-contrasting);
+        }
+      
+
+      #lucid-mode-button {
+        overflow: hidden;
+      }
+
+      #lucid-mode-button:has(.custom-button-text[enabled]) {
+        padding: 0 16px
+      }
+
+      #lucid-mode-button .custom-button-text[enabled] {
+        min-width: var(--lucid-label-min-width);
+        padding: 0;
+      }
+
+      #lucid-mode-button:has(.custom-button-text[enabled]) .custom-button-image {
+        width: 20px;
+        margin-right: 8px;
+      }
+
+      #lucid-mode-button .custom-button-image .image {
+        background-image: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/lucid.svg);
+        background-size: contain;
+        background-position: center;
+        border-radius: 10px;
+        height: 20px;
+        width: 20px;
+      }
+
+      /* Hover animation: Ripple effect */
+      #lucid-mode-button:hover .custom-button-image .image {
+        transform: scale(1.1);
+        transition: all 0.1s;
+      }
+
+      #lucid-mode-button:hover .custom-button-image .image:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        z-index: -1;
+        background-color: rgba(255, 255, 255, 0.3);
+        animation: ripple 0.8s linear infinite;
+      }
+
+      @keyframes ripple {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0),
+                      0 0 0 3px rgba(255, 255, 255, 0.1),
+                      0 0 0 6px rgba(255, 255, 255, 0.1);
+        }
+        100% {
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1),
+                      0 0 0 6px rgba(255, 255, 255, 0.1),
+                      0 0 0 9px rgba(255, 255, 255, 0);
+        }
+      }
+
+      /* Click animation: Explosion effect */
+      .custom-button-wrapper #lucid-mode-button:focus {
+        outline: 0;
+      }
+
+      .custom-button-wrapper #lucid-mode-button:before,
+      .custom-button-wrapper #lucid-mode-button:after {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 140%;
+        height: 100%;
+        left: -20%;
+        z-index: -1000;
+        transition: all ease-in-out 0.5s;
+        background-repeat: no-repeat;
+      }
+
+      .custom-button-wrapper #lucid-mode-button:before {
+        display: none;
+        top: -75%;
+        background-image: url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg");
+        background-size: 7px, 9px, 6px, 11px, 10px, 7px, 9px, 7px, 10px;
+      }
+
+      .custom-button-wrapper #lucid-mode-button:after {
+        display: none;
+        bottom: -75%;
+        background-image: url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg"),url("chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/star.svg");
+        background-size: 9px, 11px, 10px, 11px, 9px, 7px, 11px;
+      }
+
+      .custom-button-wrapper[exploding] #lucid-mode-button:before {
+        display: block;
+        animation: topExplosion ease-out 0.75s forwards;
+      }
+
+      .custom-button-wrapper[exploding] #lucid-mode-button:after {
+        display: block;
+        animation: bottomExplosion ease-out 0.75s forwards;
+      }
+
+      @keyframes topExplosion {
+        0% {
+          background-position: 20% 110%, 24% 110%, 39% 110%, 45% 110%, 50% 110%,
+                               58% 110%, 62% 110%, 70% 110%, 80% 110%;
+        }
+        50% {
+          background-position: 10% 80%, 14% 40%, 20% 50%, 40% 40%, 60% 45%,
+                               70% 55%, 80% 45%, 84% 50%, 90% 40%;
+        }
+        100% {
+          background-position: 0% 70%, 4% 10%, 1% 30%, 35% -10%, 70% 20%,
+                               82% 40%, 104% 40%, 110% 10%, 130% 20%;
+          background-size: 0, 0, 0, 0, 0, 0;
+        }
+      }
+
+      @keyframes bottomExplosion {
+        0% {
+          background-position: 20% -30%, 30% -10%, 55% -30%, 60% -30%, 65% -30%,
+                               70% -30%, 73% -20%;
+        }
+        50% {
+          background-position: 10% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%,
+                               85% 60%, 95% 0%;
+        }
+        100% {
+          background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%,
+                               95% 70%, 110% 10%;
+          background-size: 0, 0, 0, 0;
+        }
+      }
+    </style><div class="container"><div class="button-container"><div class="custom-button-wrapper"><div class="custom-button" id="video-detach-button" aria-label="Detach button"><div class="custom-button-contents custom-button-image"><div class="image"></div></div><div class="custom-button-contents custom-button-text"></div></div></div><div class="custom-button-wrapper"><div class="custom-button" id="send-by-qrcode-button" aria-label="Send video to phone" disabled=""><div class="custom-button-contents custom-button-image"><div class="image"></div></div><div class="custom-button-contents custom-button-text"></div></div></div><div class="custom-button-wrapper" style="--lucid-label-min-width:47.3247px;"><div class="custom-button" id="lucid-mode-button" aria-label="Lucid Mode Button" disabled=""><div class="custom-button-contents custom-button-image"><div class="image"></div></div><div class="custom-button-contents custom-button-text"></div></div></div></div></div></template></div><div class="hidden" id="qr-host" style="--opera-video-toolbar-button-color-contrasting:hsla(0, 0%, 100%, 1);"><template shadowrootmode="open"><style type="text/css">
+        :host {
+          
+      --opera-video-toolbar-button-color: env(-opera-gx-accent-color);
+      --opera-video-toolbar-dialog-shadow-color: hsl(env(-opera-gx-accent-color-h) env(-opera-gx-accent-color-s) env(-opera-gx-accent-color-l) / 48%);
+      --opera-video-toolbar-dialog-bg-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 12%);
+      --opera-video-toolbar-dialog-bg-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 100%);
+      --opera-video-toolbar-dialog-text-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 100%);
+      --opera-video-toolbar-dialog-text-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 0%);
+      --opera-video-toolbar-dialog-icon-color-dark: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 77%);
+      --opera-video-toolbar-dialog-icon-color-light: hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 12%);
+      --opera-video-toolbar-dialog-cover-color': hsl(env(-opera-gx-background-color-h) env(-opera-gx-background-color-s) 4% / 60%);
+      --opera-video-toolbar-dialog-border-color: env(-opera-gx-accent-color);
+    ;
+          width: 716px;
+          height: 424px;
+          position: fixed;
+          z-index: 9999;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          :host {
+            --opera-video-toolbar-dialog-bg-color:
+              var(--opera-video-toolbar-dialog-bg-color-dark);
+            --opera-video-toolbar-dialog-text-color:
+              var(--opera-video-toolbar-dialog-text-color-dark);
+            --opera-video-toolbar-dialog-icon-color:
+              var(--opera-video-toolbar-dialog-icon-color-dark);
+            --opera-video-toolbar-dialog-illustration-color:
+              var(--opera-video-toolbar-dialog-text-color-dark);
+          }
+        }
+
+        @media (prefers-color-scheme: light) {
+          :host {
+            --opera-video-toolbar-dialog-bg-color:
+              var(--opera-video-toolbar-dialog-bg-color-light);
+            --opera-video-toolbar-dialog-text-color:
+              var(--opera-video-toolbar-dialog-text-color-light);
+            --opera-video-toolbar-dialog-icon-color:
+              var(--opera-video-toolbar-dialog-icon-color-light);
+            --opera-video-toolbar-dialog-illustration-color:
+              var(--opera-video-toolbar-dialog-icon-color-light);
+          }
+        }
+
+       :host(.hidden) {
+         display: none !important;
+       }
+
+       .qr-cover {
+         background: var(--opera-video-toolbar-dialog-cover-color);
+         position: absolute:
+         width: 100%;
+         height: 100%;
+       }
+
+       .qr-container {
+         --dialog-width: 716px;
+         --dialog-height: 424px;
+         display: flex;
+         flex-direction: row;
+         padding: 12px;
+         background: var(--opera-video-toolbar-dialog-bg-color);
+         width: var(--dialog-width);
+         height: var(--dialog-height);
+         box-sizing: border-box;
+         color: var(--opera-video-toolbar-dialog-text-color);
+         position: absolute;
+         top: calc(50% - var(--dialog-height)/2);
+         left: calc(50% - var(--dialog-width)/2);
+         font-family: system-ui;
+         font-size: 16px;
+         font-style: normal;
+         font-weight: 400;
+         line-height: 22px;
+         letter-spacing: 0em;
+         text-align: center;
+         border-radius: 4px;
+         border: 1px solid var(--opera-video-toolbar-dialog-border-color);
+         box-shadow: 0px 4px 40px
+                     var(--opera-video-toolbar-dialog-shadow-color);
+       }
+
+       #qr-code {
+         width: 400px;
+         background: white;
+         padding: 20px;
+         box-sizing: border-box;
+         position: relative;
+       }
+
+       #qr-description {
+         flex: 1 1;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         position: relative;
+       }
+
+       #qr-description > #illustration {
+         background-color: var(--opera-video-toolbar-dialog-illustration-color);
+         -webkit-mask-image: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/send_to_phone.svg);
+         height: 122px;
+         width: 219px;
+         margin-bottom: 32px;
+       }
+
+       #close-btn {
+         width: 20px;
+         height: 20px;
+         position: absolute;
+         background: var(--opera-video-toolbar-dialog-icon-color);
+         top: 12px;
+         right: 12px;
+         cursor: pointer;
+         -webkit-mask-position: center;
+         -webkit-mask-repeat: no-repeat;
+         -webkit-mask-image: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/close.svg);
+       }
+
+       #feedback-btn {
+         position: absolute;
+         background: var(--opera-video-toolbar-button-color);
+         right: 48px;
+         top: 13px;
+         cursor: pointer;
+         height: 16px;
+         font-weight: 700;
+         font-size: 13px;
+         line-height: 16px;
+         text-align: right;
+         padding: 1px 4px;
+         border-radius: 2px;
+       }
+
+       #qr-description-text {
+         height: 44px;
+         width: 215px;
+       }
+
+       #qr-phone-icon {
+         height: 70px;
+         width: 70px;
+         top: 165px;
+         left: 165px;
+         position: absolute;
+         background: white;
+         border: 6px solid #000000;
+         border-radius: 36px;
+         box-sizing: border-box;
+       }
+
+       #qr-phone-icon::after {
+         display: block;
+         content: '';
+         position: absolute;
+         height: 58px;
+         width: 58px;
+         position: absolute;
+         background-color: var(--opera-video-toolbar-button-color);
+         -webkit-mask-image: url(chrome-extension://hhckidpbkbmoeejbddojbdgidalionif/images/logo.svg);
+         -webkit-mask-position: center;
+         -webkit-mask-repeat: no-repeat;
+         -webkit-mask-size: 44px 44px;
+       }
+
+       @keyframes scan-line-animation {
+         0%   {top:0px;}
+         50%  {top: calc(100% - 2px);}
+         100%   {top:0px;}
+       }
+
+       #scan-line {
+         left: 0px;
+         position: absolute;
+         height: 2px;
+         width: 400px;
+         box-shadow: 0px 0px 8px var(--opera-video-toolbar-button-color);
+         box-sizing: content-box;
+         background: var(--opera-video-toolbar-button-color);
+         animation-name: scan-line-animation;
+         animation-duration: 2s;
+         animation-iteration-count: infinite;
+         z-index: 1;
+         animation-timing-function: cubic-bezier(.75,0,.25,1);
+       }
+      </style><div class="qr-cover"><div class="qr-container"><div id="qr-code"><div id="qr-phone-icon"></div><div id="qr-code-internal"></div><div id="scan-line"></div></div><div id="qr-description"><div id="illustration"></div><div id="qr-description-text">Scan QR code to continue watching video on mobile</div></div><div id="feedback-btn">Feedback</div><div id="close-btn"></div></div></div></template></div></html>
