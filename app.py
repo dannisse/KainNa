@@ -12,6 +12,9 @@ def home():
 @app.route('/about')
 def about():
     return render_template("about.html")
+@app.route('/recipes')
+def recipes():
+    return render_template("recipes.html")
 @app.route('/mainDish')
 def mainDish():
     return render_template("mainDish.html")
